@@ -2,18 +2,14 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFavoritesById } from '../features/posts/favorites/favoritesSlice'
 import Favorites from './Favorites';
-import Navbar from './Navbar';
+
 
 const Favorited = () => {
-    const favorites = useSelector(state => state.favorites.posts); //importing
+    const favorites = useSelector(state => state.favorites.favorites); //importing
+    console.log(favorites, "Did we grab Favorites?")
     const dispatch = useDispatch();
 
-    const fetchPostsToState = async () => {
-        await fetch("/list-favorites/:id")
-            .then(response => response.json())
-            .then(json => dispatch(setPosts(json)));
-    }
-
+   
     const deleteFavoritesById = async (id, e) => {
         await fetch(`/delete-favorites/${id}`, {
             method: 'DELETE',
@@ -37,9 +33,8 @@ const Favorited = () => {
     
     return (
         <div className="favoritesBody">
-            <Navbar/>
-            {favorites.map(post => 
-            <Favorites post={post} key={post.id} deleteFavoritesById={deleteFavoritesById} fetchPostsToState={fetchPostsToState}/>
+            {favorites.map(favorite => 
+            <Favorites favorite={favorite} key={favorite.id} deleteFavoritesById={deleteFavoritesById} fetchPostsToState={fetchPostsToState}/>
             )}
         </div>
     )
