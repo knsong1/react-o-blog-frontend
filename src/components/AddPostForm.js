@@ -35,9 +35,12 @@ const AddPostForm = () => {
         <form id="add-post" onSubmit={submitForm} >
             <label htmlFor="title">Title:</label><br/>
             <input onChange={(event) => setTitle(event.target.value)} type="text" id="title" name="title" placeholder="Title for Post" required/><br/>
-            <label htmlFor="post">Post:</label><br/>
-            <input onChange={(event) => setPosts(event.target.value)} type="text" id="post" name="post" placeholder="Thoughts for the day..." required/><br/><br/>
-            <input type="submit" value="Submit"/>
+            <label htmlFor="post">Post:</label><br/> 
+            
+            <textarea onChange={(event) => setPosts(event.target.value)} style={{rows: '4', cols:"50"}} type="text" id="post" name="post" placeholder="Thoughts for the day..." required>
+            
+            </textarea>
+             <input type="submit" value="Submit"/>
         </form>
     )
 }

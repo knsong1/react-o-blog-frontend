@@ -2,12 +2,17 @@
 import './App.css';
 import React from "react";
 import BlogPage from './components/BlogPage';
+import Navbar from './components/Navbar';
 
 
 function App() {
   return (
     <div className='App'>
-      <BlogPage/>
+      <div className='postsWrapper'>
+           <Navbar/>
+          <BlogPage/>
+      </div>
+   
     </div>
   );
 }

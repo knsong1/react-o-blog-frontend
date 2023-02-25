@@ -10,7 +10,7 @@ const Posted = () => {
     const posts = useSelector(state => state.posts.posts); 
     const [postArray, setPostArray] = useState([])
 
-    console.log(posts, "I am in Posted")
+   
     const dispatch = useDispatch();
 
     const fetchPostsToState = async () => {
@@ -66,21 +66,29 @@ const Posted = () => {
 
 
     return (
-        <div>  
+
+                <div>  
              <Navbar/>
-             <h1>All Posts</h1>
+             <h1 className='cloud'>All Posts</h1>
            <SearchBar setPostArray={setPostArray}/>
-           {
+           <div className='postsWrapper'>
+              {
            postArray.length !== 0
            ?
            postArray.map(post => 
+           
             <Post post={post} key={post.id} fetchFavoritesToState={fetchFavoritesToState} addingFavorites={addingFavorites} removePostById={removePostById} fetchPostsToState={fetchPostsToState}/>
             )
             :
             posts.map(post => 
             <Post post={post}  key={post.id}  fetchFavoritesToState={fetchFavoritesToState} addingFavorites={addingFavorites} removePostById={removePostById} fetchPostsToState={fetchPostsToState}/>
             )} 
+           </div>
+         
+            
         </div>
+ 
+    
  
      
      
