@@ -7,7 +7,7 @@ export const favoritesSlice = createSlice({
     },
     reducers: {
         removeFavoritesById: (state, action) => {
-            state.posts = state.posts.filter(posts => posts.id !== action.payload)
+            state.posts = state.posts.filter(posts => posts.postid !== action.payload)
         }
     }
 })

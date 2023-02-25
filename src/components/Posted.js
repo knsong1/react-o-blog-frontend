@@ -1,11 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Post from './Post';
 import { useSelector, useDispatch } from 'react-redux';
-import { deletePostById, setPosts } from '../features/posts/postSlice';
+import { deletePostById, setPosts, favoritePostById } from '../features/posts/postSlice';
 import Navbar from './Navbar';
+import SearchBar from './SearchBar';
 
-export function Posted() {
+
+const Posted = () => {
     const posts = useSelector(state => state.posts.posts); 
+    const [postArray, setPostArray] = useState([])
+
+    console.log(posts, "I am in Posted")
     const dispatch = useDispatch();
 
     const fetchPostsToState = async () => {
@@ -13,6 +18,12 @@ export function Posted() {
             .then(response => response.json())
             .then(json => dispatch(setPosts(json)));
     } 
+
+    const fetchFavoritesToState = async () => {
+        await fetch("/list-favorites")
+            .then(response => response.json())
+            .then(json => dispatch(setPosts(json)));
+    }
 
     const removePostById = async (id, e) => {
         await fetch(`/delete-posts/${id}`, {
@@ -31,9 +42,21 @@ export function Posted() {
         })
     }
 
-    const onSearchChange = (value) => {
-        const newData= posts.filter(cust=> cust.title.includes(value))
-        console.log(newData, "did we grab titles?")
+    const addingFavorites = async (id) => {
+        await fetch(`/add-favorites/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+            window.location.reload();
+            dispatch(favoritePostById(id));
+            
+        })
     }
 
     useEffect(() => {
@@ -41,14 +64,21 @@ export function Posted() {
     }, [])
 
 
+
     return (
-        <div>
-            <input type="search" 
-            onChange={(e) => onSearchChange(e.target.value)}            />
-            <h1>All </h1>
+        <div>  
              <Navbar/>
-           {posts.map(post => 
-            <Post post={post} key={post.id} removePostById={removePostById} fetchPostsToState={fetchPostsToState} onSearchChange={onSearchChange}/>
+             <h1>All Posts</h1>
+           <SearchBar setPostArray={setPostArray}/>
+           {
+           postArray.length !== 0
+           ?
+           postArray.map(post => 
+            <Post post={post} key={post.id} fetchFavoritesToState={fetchFavoritesToState} addingFavorites={addingFavorites} removePostById={removePostById} fetchPostsToState={fetchPostsToState}/>
+            )
+            :
+            posts.map(post => 
+            <Post post={post}  key={post.id}  fetchFavoritesToState={fetchFavoritesToState} addingFavorites={addingFavorites} removePostById={removePostById} fetchPostsToState={fetchPostsToState}/>
             )} 
         </div>
  
@@ -57,4 +87,4 @@ export function Posted() {
     )
 }
 
-export default Posted
+export default Posted;

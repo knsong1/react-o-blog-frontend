@@ -15,6 +15,12 @@ const BlogPage = () => {
             .then(json => dispatch(setPosts(json)));
     }
 
+    const fetchFavoritesToState = async () => {
+        await fetch("/list-favorites/:id")
+            .then(response => response.json())
+            .then(json => dispatch(setPosts(json)));
+    }
+
     const removePostById = async (id, e) => {
         await fetch(`/delete-posts/${id}`, {
             method: 'DELETE',
@@ -32,7 +38,7 @@ const BlogPage = () => {
         })
     }
 
-    const addingFavorites = async (id, e) => {
+    const addingFavorites = async (id) => {
         await fetch(`/add-favorites/:id`, {
             method: 'POST',
             headers: {
@@ -49,6 +55,7 @@ const BlogPage = () => {
         })
     }
 
+
     useEffect(() => {
         fetchPostsToState();
     }, [])
@@ -58,7 +65,7 @@ const BlogPage = () => {
             <Navbar/>
             <AddPostForm/>
             {posts.map(post => 
-            <Post post={post} key={post.id} addingFavorites={addingFavorites} removePostById={removePostById} fetchPostsToState={fetchPostsToState}/>
+            <Post post={post} key={post.id} fetchFavoritesToState={fetchFavoritesToState} addingFavorites={addingFavorites} removePostById={removePostById} fetchPostsToState={fetchPostsToState}/>
             )}
         </div>
     )

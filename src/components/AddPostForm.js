@@ -8,7 +8,7 @@ const AddPostForm = () => {
 
     const dispatch = useDispatch();
 
-    const submitForm = async (event) => {
+    const submitForm = async () => {
         await fetch('/posts', {
             method: 'POST',
             headers: {
