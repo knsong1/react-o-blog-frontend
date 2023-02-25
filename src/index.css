@@ -1,10 +1,12 @@
 body {
-  display: flex;
+ 
+  align-items: center;
   justify-content: center;
   text-align: center;
   padding-top: 100px;
   padding-bottom: 100px;
-  width: 100%;
+  background-color:#fcf4dd;
+  margin-left: 0 !important;
 }
 
 code {
@@ -13,17 +15,88 @@ code {
 }
 
 #add-post {
+ 
   border: 2px solid black;
   margin: 50px;
   margin-bottom: 100px;
   padding: 20px;
   border-radius: 25px;
   box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  background-color: #fce1e4;
+  
+ 
 }
 
+.postsWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.postForm {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  padding-bottom: 30px;
+}
+
+
+
 .postBlock {
+
   border: 2px solid black;
   border-radius: 5px;
   padding: 15px;
   margin: 30px;
+  background-color:  #e8dff5;
+  box-shadow: 12px 12px 2px 1px rgba(203, 106, 175, 0.2);
+}
+
+.navWrapper {
+  background-color:  #daeaf6;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100% !important;
+  margin-left: 0px !important;
+  padding-left: 0% !important;
+  text-decoration: none;
+
+}
+
+.cloud{ 
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  width: 20em;
+  height: max-content;
+  background:#ECEFF1;
+  box-shadow: 10px 10px rgba(0,0,0,0.2);
+  border-radius:100px;
+
+}
+
+.navLinks {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none !important;
+
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.navLinks:hover {
+  background: #9cadce;
+  color: black;
 }

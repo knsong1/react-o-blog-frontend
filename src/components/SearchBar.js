@@ -9,19 +9,19 @@ const SearchBar = ({setPostArray}) => {
 //  const [postArray, setPostArray] = useState([])
 
  const posts = useSelector(state => state.posts.posts); 
- console.log(posts, "I am in SearchBar")
+
 
 
  const submitHandler = (e) => {
     e.preventDefault();
 
     const temppostArray = posts.filter(post => {
-         console.log(post, "listing array")
+   
         return post.post.toLowerCase().includes(term)  
        
     });
     setPostArray(temppostArray)
-    console.log(temppostArray, "list array")
+
  } 
 
    const reloadHandler = (e) => {
@@ -33,9 +33,9 @@ const SearchBar = ({setPostArray}) => {
  
 
 return (
-    <div>
+    <div className="postsWrapper">
         
-            <form onSubmit={submitHandler}>
+            <form className="postForm" onSubmit={submitHandler}>
                 <input type="text" value={term} placeholder='Find your post...'
                 onChange={(e) => reloadHandler(e)} />
                 <button type='submit'> Search </button>

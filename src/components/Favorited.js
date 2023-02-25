@@ -33,6 +33,7 @@ const Favorited = () => {
     
     return (
         <div className="favoritesBody">
+       
             {favorites.map(favorite => 
             <Favorites favorite={favorite} key={favorite.id} deleteFavoritesById={deleteFavoritesById} fetchPostsToState={fetchPostsToState}/>
             )}
